@@ -1,0 +1,78 @@
+<html>
+
+<head>
+  <title>Aire Acondicionado</title>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css'>
+</head>
+
+<body class="w3-light-gray">
+
+  <form action='/get' class='w3-container w3-card-4 w3-margin-top'>
+
+    <div class="w3-half">
+      <h2 class='w3-center w3-text-blue'>Programación 1</h2>
+      <table class='w3-table w3-border'>
+        <tr>
+          <td><label>Activar:</label></td>
+          <td><input name='enable1' class='w3-input w3-border w3-margin-bottom' type='checkbox' ENABLE_VALUE1
+              style='width: 5em;' /></td>
+        </tr>
+        <tr>
+          <td><label>Temperatura:</label></td>
+          <td><input name='temp1' class='w3-input w3-border' type='number' value='TEMP_VALUE1' style='width: 5em;' />
+          </td>
+        </tr>
+        <tr>
+          <td><label>Hora Inicio:</label></td>
+          <td><input name='start1' class='w3-input w3-border' type='time' min='00:00' value='START_VALUE1' max='23:59'
+              style='width: 5em;' />
+          </td>
+        </tr>
+        <tr>
+          <td><label>Hora Fin:</label></td>
+          <td><input name='end1' class='w3-input w3-border' type='time' min='00:00' max='23:59' value='END_VALUE1'
+              style='width: 5em;' />
+          </td>
+        </tr>
+      </table>
+
+    </div>
+
+    <div class="w3-half">
+      <h2 class='w3-center w3-text-blue'>Programación 2</h2>
+      <table class='w3-table w3-border'>
+        <tr>
+          <td><label>Activar:</label></td>
+          <td><input name='enable2' class='w3-input w3-border w3-margin-bottom' type='checkbox' ENABLE_VALUE2
+              style='width: 5em;' /></td>
+        </tr>
+        <tr>
+          <td><label>Temperatura:</label></td>
+          <td><input name='temp2' class='w3-input w3-border' type='number' value='TEMP_VALUE2' style='width: 5em;' />
+          </td>
+        </tr>
+        <tr>
+          <td><label>Hora Inicio:</label></td>
+          <td><input name='start2' class='w3-input w3-border' type='time' min='00:00' value='START_VALUE2' max='23:59'
+              style='width: 5em;' />
+          </td>
+        </tr>
+        <tr>
+          <td><label>Hora Fin:</label></td>
+          <td><input name='end2' class='w3-input w3-border' type='time' min='00:00' max='23:59' value='END_VALUE2'
+              style='width: 5em;' />
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class='w3-center w3-margin-top w3-margin-bottom'>
+      <input class='w3-button w3-round-large w3-blue w3-margin-top' type='submit' value='Guardar'></button>
+    </div>
+
+  </form>
+
+</body>
+
+</html>
