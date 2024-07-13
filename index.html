@@ -1,77 +1,195 @@
-<html>
+<!DOCTYPE html>
 
 <head>
   <title>Aire Acondicionado</title>
   <meta charset='UTF-8'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
   <link rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css'>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
 <body class="w3-light-gray">
-
-  <form action='/get' class='w3-container w3-card-4 w3-margin-top'>
-
-    <div class="w3-half">
-      <h2 class='w3-center w3-text-blue'>Programación 1</h2>
-      <table class='w3-table w3-border'>
-        <tr>
-          <td><label>Activar:</label></td>
-          <td><input name='enable1' class='w3-input w3-border w3-margin-bottom' type='checkbox' ENABLE_VALUE1
-              style='width: 5em;' /></td>
-        </tr>
-        <tr>
-          <td><label>Temperatura:</label></td>
-          <td><input name='temp1' class='w3-input w3-border' type='number' value='TEMP_VALUE1' style='width: 5em;' />
-          </td>
-        </tr>
-        <tr>
-          <td><label>Hora Inicio:</label></td>
-          <td><input name='start1' class='w3-input w3-border' type='time' min='00:00' value='START_VALUE1' max='23:59'
-              style='width: 5em;' />
-          </td>
-        </tr>
-        <tr>
-          <td><label>Hora Fin:</label></td>
-          <td><input name='end1' class='w3-input w3-border' type='time' min='00:00' max='23:59' value='END_VALUE1'
-              style='width: 5em;' />
-          </td>
-        </tr>
-      </table>
-
+    <div class='w3-container w3-card-4'>
+      <div class='w3-center'>
+        <h2 class='w3-center w3-text-blue'>Hora: TIME_VALUE</h2>
+      </div>
     </div>
 
-    <div class="w3-half">
-      <h2 class='w3-center w3-text-blue'>Programación 2</h2>
-      <table class='w3-table w3-border'>
-        <tr>
-          <td><label>Activar:</label></td>
-          <td><input name='enable2' class='w3-input w3-border w3-margin-bottom' type='checkbox' ENABLE_VALUE2
-              style='width: 5em;' /></td>
-        </tr>
-        <tr>
-          <td><label>Temperatura:</label></td>
-          <td><input name='temp2' class='w3-input w3-border' type='number' value='TEMP_VALUE2' style='width: 5em;' />
-          </td>
-        </tr>
-        <tr>
-          <td><label>Hora Inicio:</label></td>
-          <td><input name='start2' class='w3-input w3-border' type='time' min='00:00' value='START_VALUE2' max='23:59'
-              style='width: 5em;' />
-          </td>
-        </tr>
-        <tr>
-          <td><label>Hora Fin:</label></td>
-          <td><input name='end2' class='w3-input w3-border' type='time' min='00:00' max='23:59' value='END_VALUE2'
-              style='width: 5em;' />
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div class='w3-center w3-margin-top w3-margin-bottom'>
-      <input class='w3-button w3-round-large w3-blue w3-margin-top' type='submit' value='Guardar'></button>
-    </div>
+    <div class='w3-container w3-margin-bottom'>
+      <form action='/get' class='w3-container w3-card-4 w3-margin-top w3-margin-bottom'>         
+        <div class='w3-center w3-margin-bottom'>
+          <h2 class='w3-center w3-text-blue'>Manual</h2>
+          <table class='w3-table w3-border'>
+            <tr>
+              <td><label>Ventilador:</label></td>
+              <td><select name="fan0" id="fan0Select" value='FAN_VALUE0'>
+                <option value="0">Auto</option>
+                <option value="1">Mínimo</option>
+                <option value="2">Bajo</option>
+                <option value="3">Medio</option>
+                <option value="4">Alto</option>
+              </select></td>
+            </tr>
+            <tr>
+              <td><label>Temperatura:</label></td>
+              <td><input name='temp0' class='w3-input w3-border' type='number' value='TEMP_VALUE0' style='width: 5em;' />
+              </td>
+            </tr>
+          </table>
 
-  </form>
+          <div class='w3-center' x-data="{ status: 'STATUS_VALUE' }">
+            <template x-if="status === 'ON'">
+              <div class='w3-center w3-margin-top w3-margin-bottom'>
+                <input class='w3-button w3-round-large w3-blue w3-margin-top' type='submit' value='OFF'></button>
+              </div>
+            </template>
+            <template x-if="status === 'OFF'">
+              <div class='w3-center w3-margin-top w3-margin-bottom'>
+                <input class='w3-button w3-round-large w3-blue w3-margin-top' type='submit' value='ON'></button>
+              </div>
+            </template>
+          </div>
+        </div>
+    </form>  
+  </div>
+  
+  <div class='w3-container'>
+    <form action='/get' class='w3-container w3-card-4 w3-margin-top'>
+      <div class='w3-center' x-data="{ status: 'STATUS_VALUE' }">
+        <label>Estado: </label>
+        <template x-if="status === 'ON'">
+          <span class='w3-text-green' x-text='status'></span>
+        </template>
+        <template x-if="status === 'OFF'">
+          <span class='w3-text-red' x-text='status'></span>
+        </template>
+      </div>
+        
+      <div class='w3-half'>
+        <h2 class='w3-center w3-text-blue'>Programación 1</h2>
+        <table class='w3-table w3-border'>
+          <tr>
+            <td><label>Activar:</label></td>
+            <td><select name="enable1" id="enable1Select" value='ENABLE_VALUE1'>
+              <option value="enable">Activado</option>
+              <option value="disable">Desactivado</option>
+            </select></td>
+          </tr>
+          <tr>
+            <td><label>Ventilador:</label></td>
+            <td><select name="fan1" id="fan1Select" value='FAN_VALUE1'>
+              <option value="0">Auto</option>
+              <option value="1">Mínimo</option>
+              <option value="2">Bajo</option>
+              <option value="3">Medio</option>
+              <option value="4">Alto</option>
+            </select></td>
+          </tr>
+          <tr>
+            <td><label>Temperatura:</label></td>
+            <td><input name='temp1' class='w3-input w3-border' type='number' value='TEMP_VALUE1' style='width: 5em;' />
+            </td>
+          </tr>
+          <tr>
+            <td><label>Hora Inicio:</label></td>
+            <td><input name='start1' class='w3-input w3-border' type='time' min='00:00' value='START_VALUE1' max='23:59'
+                style='width: 5em;' />
+            </td>
+          </tr>
+          <tr>
+            <td><label>Hora Fin:</label></td>
+            <td><input name='end1' class='w3-input w3-border' type='time' min='00:00' max='23:59' value='END_VALUE1'
+                style='width: 5em;' />
+            </td>
+          </tr>
+        </table>
+
+      </div>
+
+      <div class="w3-half">
+        <h2 class='w3-center w3-text-blue'>Programación 2</h2>
+        <table class='w3-table w3-border'>
+          <tr>
+            <td><label>Activar:</label></td>
+            <td><select name="enable2" id="enable2Select" value='ENABLE_VALUE2'>
+              <option value="enable">Activado</option>
+              <option value="disable">Desactivado</option>
+            </select></td>
+          </tr>
+          <tr>
+            <td><label>Ventilador:</label></td>
+            <td><select name="fan2" id="fan2Select" value='FAN_VALUE2'>
+              <option value="0">Auto</option>
+              <option value="1">Mínimo</option>
+              <option value="2">Bajo</option>
+              <option value="3">Medio</option>
+              <option value="4">Alto</option>
+            </select></td>
+          </tr>
+          <tr>
+            <td><label>Temperatura:</label></td>
+            <td><input name='temp2' class='w3-input w3-border' type='number' value='TEMP_VALUE2' style='width: 5em;' />
+            </td>
+          </tr>
+          <tr>
+            <td><label>Hora Inicio:</label></td>
+            <td><input name='start2' class='w3-input w3-border' type='time' min='00:00' value='START_VALUE2' max='23:59'
+                style='width: 5em;' />
+            </td>
+          </tr>
+          <tr>
+            <td><label>Hora Fin:</label></td>
+            <td><input name='end2' class='w3-input w3-border' type='time' min='00:00' max='23:59' value='END_VALUE2'
+                style='width: 5em;' />
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class='w3-center w3-margin-top w3-margin-bottom'>
+        <input class='w3-button w3-round-large w3-blue w3-margin-top' type='submit' value='Guardar'></button>
+      </div>
+
+    </form>
+  </div>
+
+<script>
+  var selectElement = document.getElementById('enable1Select');
+
+  for (var i = 0; i < selectElement.options.length; i++) {
+    if (selectElement.options[i].value === 'ENABLE_VALUE1') {
+      selectElement.options[i].selected = true;
+      break;
+    }
+  }
+
+  selectElement = document.getElementById('enable2Select');
+
+  for (var i = 0; i < selectElement.options.length; i++) {
+    if (selectElement.options[i].value === 'ENABLE_VALUE2') {
+      selectElement.options[i].selected = true;
+      break;
+    }
+  }
+
+  selectElement = document.getElementById('fan1Select');
+
+  for (var i = 0; i < selectElement.options.length; i++) {
+    if (selectElement.options[i].value === 'FAN_VALUE1') {
+      selectElement.options[i].selected = true;
+      break;
+    }
+  }
+
+  selectElement = document.getElementById('fan2Select');
+
+  for (var i = 0; i < selectElement.options.length; i++) {
+    if (selectElement.options[i].value === 'FAN_VALUE2') {
+      selectElement.options[i].selected = true;
+      break;
+    }
+  }
+
+</script>
 
 </body>
 
