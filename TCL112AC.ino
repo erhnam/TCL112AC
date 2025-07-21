@@ -29,11 +29,11 @@ const char* ENABLED = "enable";
 const char* DISABLED = "disable";
 
 // Red
-IPAddress staticIP(192, 168, 0, 254);
-IPAddress gateway(192, 168, 0, 1);
-IPAddress subnet(255, 255, 255, 0);
-IPAddress dns1(8, 8, 8, 8);
-IPAddress dns2(8, 8, 4, 4);
+IPAddress staticIP(IP_STATIC);
+IPAddress gateway(IP_GATEWAY);
+IPAddress subnet(IP_SUBNET);
+IPAddress dns1(IP_DNS1);
+IPAddress dns2(IP_DNS2);
 
 // Web y NTP
 WiFiUDP ntpUDP;
@@ -118,8 +118,8 @@ void formatHour() {
 }
 
 void setupFota() {
-  ArduinoOTA.setHostname("AireAC");
-  ArduinoOTA.setPassword("PacoAC");
+  ArduinoOTA.setHostname(OTA_HOSTNAME);
+  ArduinoOTA.setPassword(OTA_PASS);
   ArduinoOTA.onStart([]() { });
   ArduinoOTA.onEnd([]() { });
   ArduinoOTA.onProgress([](unsigned int, unsigned int) { });
@@ -129,11 +129,7 @@ void setupFota() {
 
 void setupServer() {
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
-    AsyncWebServerResponse *response = request->beginResponse(200, "text/html", renderHTML());
-    response->addHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-    response->addHeader("Pragma", "no-cache");
-    response->addHeader("Expires", "-1");
-    request->send(response);
+    request->send(200, "text/html", renderHTML());
   });
 
   server.on("/getManual", HTTP_GET, [](AsyncWebServerRequest *request) {
@@ -145,9 +141,7 @@ void setupServer() {
     manual.old_executed = manual.executed;
     manual.executed = false;
     receive_get = true;
-
-      // Redirige a la raíz
-    request->redirect("/");
+    request->send(200, "text/html", renderHTML());
   });
 
   server.on("/get", HTTP_GET, [](AsyncWebServerRequest *request) {
@@ -167,9 +161,7 @@ void setupServer() {
       programer[i].executed = false;
     }
     receive_get = true;
-
-    // Redirige a la raíz
-    request->redirect("/");
+    request->send(200, "text/html", renderHTML());
   });
 
   server.onNotFound([](AsyncWebServerRequest *request) {
